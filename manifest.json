@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "BRAIN 选项保存器 (Unsubmitted Filter Saver)",
+  "version": "1.1.0",
+  "description": "自动保存并恢复 WorldQuant BRAIN 未提交 Alpha 页面 (/alphas/unsubmitted) 的筛选条件、搜索框与表格勾选状态，刷新不再丢失。",
+  "permissions": ["storage"],
+  "host_permissions": ["https://platform.worldquantbrain.com/*"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://platform.worldquantbrain.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "BRAIN 选项保存器"
+  }
+}

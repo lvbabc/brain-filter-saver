@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>BRAIN 选项保存器</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #111827;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --primary: #2563eb;
+    --primary-weak: #eff6ff;
+    --danger: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; width: 340px; background: var(--bg); color: var(--fg);
+    font: 13px/1.5 system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  }
+  header {
+    padding: 12px 14px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  header h1 { margin: 0; font-size: 14px; font-weight: 600; }
+  header .ver { color: var(--muted); font-size: 11px; }
+  .sec { padding: 12px 14px; border-bottom: 1px solid var(--line); }
+  .sec:last-child { border-bottom: none; }
+  .sec-title { font-size: 11px; color: var(--muted); letter-spacing: .04em; margin-bottom: 8px; }
+  .stat { display: flex; gap: 16px; }
+  .stat div b { display: block; font-size: 18px; font-weight: 600; }
+  .stat div span { font-size: 11px; color: var(--muted); }
+  .path { margin-top: 8px; font-size: 11px; color: var(--muted); word-break: break-all; }
+  .row { display: flex; gap: 8px; }
+  button {
+    flex: 1; padding: 7px 8px; border: 1px solid var(--line); border-radius: 6px;
+    background: #fff; color: var(--fg); font-size: 12px; cursor: pointer;
+  }
+  button:hover { background: #f9fafb; }
+  button.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+  button.primary:hover { background: #1d4ed8; }
+  button.danger { color: var(--danger); }
+  label.opt { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; }
+  label.opt input { accent-color: var(--primary); }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 8px; }
+  .msg { font-size: 12px; padding: 6px 8px; border-radius: 6px; background: var(--primary-weak); color: var(--primary); display: none; }
+  .msg.show { display: block; }
+  .warn { background: #fef2f2; color: var(--danger); }
+  kbd {
+    background: #f3f4f6; border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 4px; padding: 0 4px; font-size: 11px; font-family: inherit;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>BRAIN 选项保存器</h1>
+    <span class="ver">v2.1.0</span>
+  </header>
+
+  <div class="sec">
+    <div class="sec-title">当前页面存档</div>
+    <div class="stat">
+      <div><b id="statText">-</b><span>文本筛选</span></div>
+      <div><b id="statMulti">-</b><span>多选下拉</span></div>
+      <div><b id="statRows">-</b><span>行勾选</span></div>
+      <div><b id="statTime">-</b><span>保存于</span></div>
+    </div>
+    <div class="path" id="statPath">-</div>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">操作</div>
+    <div class="row">
+      <button class="primary" id="btnSave">立即保存</button>
+      <button class="primary" id="btnRestore">立即恢复</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button id="btnDump">导出诊断</button>
+      <button class="danger" id="btnClear">清空存档</button>
+    </div>
+    <div class="hint">快捷键：<kbd>Alt</kbd>+<kbd>S</kbd> 保存 · <kbd>Alt</kbd>+<kbd>R</kbd> 恢复 · <kbd>Alt</kbd>+<kbd>X</kbd> 清空</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">设置</div>
+    <label class="opt"><input type="checkbox" id="optAutoSave" />自动保存（改动后立即写入）</label>
+    <label class="opt"><input type="checkbox" id="optAutoRestore" />自动恢复（刷新 / 切页后自动回填）</label>
+    <label class="opt"><input type="checkbox" id="optRestoreMulti" />恢复多选下拉（Region / Universe 等）</label>
+    <label class="opt"><input type="checkbox" id="optRestoreRows" />恢复表格行的勾选状态</label>
+    <label class="opt"><input type="checkbox" id="optRestoreBuilder" />恢复顶部高级筛选（Filter 构建器）</label>
+    <label class="opt"><input type="checkbox" id="optToast" />页面显示提示条</label>
+  </div>
+
+  <div class="sec">
+    <div class="hint">若某些筛选项刷新后仍未恢复，点「导出诊断」把 JSON 发给开发者即可精确适配。</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

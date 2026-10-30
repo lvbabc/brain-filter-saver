@@ -1,0 +1,12 @@
+# 调试过程产生的页面快照 / 截图 / 控件 dump（可随时重新生成）
+inspect/*.png
+inspect/page_full.html
+inspect/controls_full.json
+
+# 本机调试用 Chrome 配置（含 BRAIN 登录态）与 WorkBuddy 项目数据 —— 绝不入库
+.chrome-brain-profile/
+.workbuddy/
+
+# 本地保留、不入库
+ARTICLE.md
+inspect/push_via_api.py
